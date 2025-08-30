@@ -43,6 +43,13 @@ export default function ListaExercicios() {
   <Text style={styles.textoBotao}>Exercício SectionList</Text>
 </TouchableOpacity>
 
+<TouchableOpacity
+  style={styles.botao}
+  onPress={() => router.push('/ExercicioFlatList')}
+>
+  <Text style={styles.textoBotao}>Exercício FlatList</Text>
+</TouchableOpacity>
+
 
 
     </View>
