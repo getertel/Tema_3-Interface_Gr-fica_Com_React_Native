@@ -1,29 +1,48 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
+// app/_layout.tsx
+import { Ionicons } from '@expo/vector-icons';
+import { Tabs } from 'expo-router';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: '#222',
+          height: 70,
+          paddingBottom: 10,
+        },
+        tabBarActiveTintColor: '#FFD700',
+        tabBarInactiveTintColor: '#aaa',
+        tabBarLabelStyle: { fontSize: 14, fontWeight: 'bold' },
+      }}
+    >
+      <Tabs.Screen
+        name="Inicio"
+        options={{
+          title: 'Início',
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? 'home' : 'home-outline'}
+              color={color}
+              size={size + 4}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Sobre1"
+        options={{
+          title: 'Sobre',
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? 'information-circle' : 'information-circle-outline'}
+              color={color}
+              size={size + 4}
+            />
+          ),
+        }}
+      />
+    </Tabs>
   );
 }
